@@ -67,7 +67,7 @@
                             <div class="mdl-card__actions mdl-card--border">
                                 <!-- INPUT SEARCHING -->
                                 <div id="progressBar" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                                <form id="inputForm" name="input" onsubmit="return false">
+                                <form id="inputForm" name="input" onsubmit="event.preventDefault()">
                                     <div name="messageInput" id="inputDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="input">
                                         <label class="mdl-textfield__label" for="input">Entrer un lieu, une adresse...</label>
@@ -154,6 +154,6 @@
 
 
 
-<script type="text/javascript" src="../static/js/main.js"></script></body>
+<script type="text/javascript" src=".././static/js/main.js"></script></body>
 
 </html>
