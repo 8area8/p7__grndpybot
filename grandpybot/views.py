@@ -30,6 +30,6 @@ def place_request():
     req = request.args
     import pdb; pdb.set_trace()
     keywords = ""
-    key = "AIzaSyDZrTwZdIVBsCMN0YbA4C5La7Ytb8OIWkw"
+    key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
            f"input={keywords}&inputtype=textquery&fields=geometry&key={key}")

@@ -11,3 +11,6 @@ _mailinglist/*
 
 # vscode
 .vscode/
+
+# env
+flaskenv.conf
