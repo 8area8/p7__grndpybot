@@ -5,7 +5,7 @@ from grandpybot import app, render_template
 
 @app.route('/')
 @app.route('/index/')
-def hello_world():
+def index():
     """Return the main file."""
     return render_template('index.html')
 
