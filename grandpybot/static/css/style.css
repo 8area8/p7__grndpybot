@@ -1,0 +1,382 @@
+@charset "UTF-8";
+body {
+  background-color: #f2f2f2;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  image-rendering: optimizeQuality;
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-optimize-contrast; }
+
+#title, h1 {
+  font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+  margin: auto;
+  margin-top: 1.5%;
+  margin-bottom: 1%; }
+  @media screen and (max-width: 600px) {
+    #title, h1 {
+      font-size: 35px;
+      margin-top: 3%;
+      margin-bottom: 2%; } }
+
+@media screen and (max-width: 600px) {
+  .mdl-layout__tab-bar {
+    font-size: 14px;
+    margin-left: 1%; } }
+
+.page-content {
+  display: flex; }
+
+.card, .cardPerso {
+  height: 800px;
+  width: 750px;
+  max-width: 90%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  background: url(../images/old2.jpg) center/cover;
+  margin-left: auto;
+  margin-right: auto; }
+  @media screen and (max-width: 600px) {
+    .card, .cardPerso {
+      height: 600px;
+      width: 95%;
+      margin-top: 5%;
+      margin-bottom: 5%; } }
+
+.demo-card-wide.mdl-card {
+  height: 80%;
+  width: 80%;
+  position: relative;
+  top: 50%;
+  /* poussé de la moitié de hauteur du référent */
+  transform: translateY(-50%);
+  /* tiré de la moitié de sa propre hauteur */
+  margin: 0 auto; }
+  @media screen and (max-width: 600px) {
+    .demo-card-wide.mdl-card {
+      height: 90%;
+      width: 90%; } }
+
+.messages, .contentPerso {
+  height: 90%;
+  overflow: auto;
+  padding: 3%; }
+
+#inputForm {
+  padding: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%; }
+
+#inputDiv {
+  margin-left: 3%; }
+  @media screen and (max-width: 600px) {
+    #inputDiv {
+      margin-left: 10%;
+      margin-right: 10%;
+      width: 80%; } }
+
+#progressBar {
+  display: none;
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto; }
+
+.mdl-button.infos {
+  position: absolute;
+  right: 0;
+  margin-right: 7%;
+  margin-top: 3%;
+  color: #ffffff; }
+  @media screen and (max-width: 600px) {
+    .mdl-button.infos {
+      display: block;
+      position: relative;
+      margin: auto; } }
+
+.mdc-shape-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden; }
+
+.mdc-shape-container__corner {
+  position: absolute;
+  z-index: 1; }
+
+.mdc-shape-container__corner::before,
+.mdc-shape-container__corner::after {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  content: ""; }
+
+.mdc-shape-container__corner--top-left {
+  transform: rotate(-45deg); }
+
+.mdc-shape-container__corner--top-right {
+  transform: rotate(45deg); }
+
+.mdc-shape-container__corner--bottom-right {
+  transform: rotate(135deg); }
+
+.mdc-shape-container__corner--bottom-left {
+  transform: rotate(-135deg); }
+
+.my-shape-container .mdc-shape-container__corner--top-left {
+  top: -49.49747px;
+  left: -49.49747px;
+  width: 98.99495px;
+  height: 98.99495px; }
+
+.my-shape-container .mdc-shape-container__corner--top-right {
+  top: -49.49747px;
+  right: -49.49747px;
+  width: 98.99495px;
+  height: 98.99495px; }
+
+.my-shape-container .mdc-shape-container__corner--bottom-right {
+  bottom: -49.49747px;
+  right: -49.49747px;
+  width: 98.99495px;
+  height: 98.99495px; }
+
+.my-shape-container .mdc-shape-container__corner--bottom-left {
+  bottom: -49.49747px;
+  left: -49.49747px;
+  width: 98.99495px;
+  height: 98.99495px; }
+
+.my-shape-container .mdc-shape-container__corner::after {
+  background-color: #f2f2f2; }
+
+@media screen and (max-width: 600px) {
+  .my-shape-container .mdc-shape-container__corner--top-left {
+    top: -14.14214px;
+    left: -14.14214px;
+    width: 28.28427px;
+    height: 28.28427px; }
+  .my-shape-container .mdc-shape-container__corner--top-right {
+    top: -14.14214px;
+    right: -14.14214px;
+    width: 28.28427px;
+    height: 28.28427px; }
+  .my-shape-container .mdc-shape-container__corner--bottom-right {
+    bottom: -14.14214px;
+    right: -14.14214px;
+    width: 28.28427px;
+    height: 28.28427px; }
+  .my-shape-container .mdc-shape-container__corner--bottom-left {
+    bottom: -14.14214px;
+    left: -14.14214px;
+    width: 28.28427px;
+    height: 28.28427px; }
+  .my-shape-container .mdc-shape-container__corner::after {
+    background-color: #f2f2f2; } }
+
+.mdl-list__item {
+  background-color: #f2f2f2;
+  margin: 3%; }
+
+.mdl-list__item-text-body {
+  margin: 1%; }
+
+.GrandPy, .Voyageur {
+  color: #8a8a8a;
+  margin: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-radius: 10px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  min-height: 65px; }
+
+.GrandPy {
+  background-color: #e7e7e7;
+  margin-right: 20%; }
+
+.Voyageur {
+  background-color: #f2f2f2;
+  margin-left: 20%; }
+
+.-text- {
+  margin: 3%;
+  margin-left: 6%;
+  margin-top: 4%;
+  display: block;
+  line-height: 120%; }
+
+.iconImg {
+  float: left;
+  margin-right: 4%;
+  margin-top: 2%;
+  margin-left: 3%;
+  border-radius: 50%; }
+
+.icon {
+  float: right;
+  margin-right: 4%;
+  margin-top: 2%;
+  margin-left: 3%;
+  border-radius: 50%; }
+
+.iconImgSearching {
+  width: 50px;
+  margin-left: 50%; }
+
+.bull {
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: block;
+  margin-left: 45%; }
+
+.loader {
+  width: 75px;
+  margin-left: 32%;
+  border-radius: 50%; }
+
+.map {
+  max-width: 90%;
+  max-height: 100%;
+  margin-left: 5%;
+  margin-right: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px; }
+
+.mdl-dialog {
+  font-size: 130%;
+  color: #e7e7e7;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 10%;
+  /* Location of the box */
+  padding-bottom: 15%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */ }
+  @media screen and (max-width: 1100px) {
+    .mdl-dialog {
+      font-size: 70%;
+      padding-top: 25%; } }
+
+.mdl-dialog__content {
+  background-color: #fff;
+  margin: auto;
+  padding: 20px;
+  width: 40%;
+  overflow: auto;
+  max-height: 80%; }
+  @media screen and (max-width: 1100px) {
+    .mdl-dialog__content {
+      width: 80%; } }
+
+.mdl-mega-footer__middle-section {
+  margin-left: 15%;
+  margin-top: 5%;
+  margin-bottom: 2%; }
+  @media screen and (max-width: 1100px) {
+    .mdl-mega-footer__middle-section {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      display: flex; } }
+  @media screen and (max-width: 500px) {
+    .mdl-mega-footer__middle-section {
+      flex-direction: column;
+      justify-content: space-between; } }
+
+@media screen and (max-width: 1100px) {
+  .mdl-mega-footer__drop-down-section {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin: auto; } }
+
+#oc {
+  border-radius: 50%; }
+
+.mdl-mega-footer__bottom-section {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 4%;
+  margin-bottom: 1%; }
+
+#gravatar {
+  border-radius: 50%;
+  float: right;
+  margin-right: 5%;
+  margin-top: 5%; }
+  @media screen and (max-width: 600px) {
+    #gravatar {
+      width: 20%;
+      height: auto; } }
+  @media screen and (max-width: 380px) {
+    #gravatar {
+      margin-top: 7%;
+      margin-right: 7%; } }
+
+#subtitle {
+  color: #fa708e;
+  margin-left: 5%; }
+  @media screen and (max-width: 600px) {
+    #subtitle {
+      font-size: 12px;
+      margin-left: 2%; } }
+
+.contentPerso {
+  margin-left: 3%;
+  height: 200px; }
+
+.cardPerso {
+  background: url(../images/old3.jpg) center/cover;
+  color: #444242; }
+
+.padded {
+  padding: 10%; }
+
+.citation {
+  font-size: 150%;
+  color: #c4c4c4;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  /* Vertical center alignment */
+  justify-content: center;
+  /* Horizontal center alignment */ }
+  @media screen and (max-width: 600px) {
+    .citation {
+      font-size: 15px; } }
+
+.technos {
+  display: flex;
+  justify-content: space-between; }
+  @media screen and (max-width: 600px) {
+    .technos {
+      overflow-x: scroll;
+      flex: none; } }
+
+@media screen and (max-width: 600px) {
+  .technoLogo {
+    display: block;
+    margin-right: 5%;
+    margin-left: 5%; } }
+
+.technoTitle {
+  margin-left: 5%;
+  color: #c4c4c4; }
+
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 20px;
+    margin-bottom: 2%; } }
+

@@ -2,7 +2,8 @@
 # -*- coding=utf-8 -*-
 """Flask app package."""
 
-from flask_website import app
+from grandpybot import app
 
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
