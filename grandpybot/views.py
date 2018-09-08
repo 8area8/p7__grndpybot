@@ -10,7 +10,11 @@ from grandpybot import app
 @app.route('/index/')
 def index():
     """Return the main file."""
-    return render_template('index.html')
+    key = app.config["GOOGLE_KEY"]
+    url = ("https://maps.googleapis.com/maps/"
+           f"api/js?key={key}&callback=initMap")
+
+    return render_template('index.html', url_map_api=url)
 
 
 @app.errorhandler(404)

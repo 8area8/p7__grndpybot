@@ -16,9 +16,10 @@
     <!-- FONT ROBOTO -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
-    <!-- GOOGLE MAP JS API !!KEY -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZrTwZdIVBsCMN0YbA4C5La7Ytb8OIWkw&callback=initMap" async
-        defer></script>
+    <!-- GOOGLE MAP JS API -->
+    {% if url_map_api %}
+    <script src="{{ url_map_api }}" async defer></script>
+    {% endif %}
 
     <!-- PERSONNAL CSS AND JS -->
     <script type="text/javascript" src="../static/js/main.js"></script>
