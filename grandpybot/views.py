@@ -1,6 +1,6 @@
 """Main file for views."""
 
-from flask import render_template, request
+from flask import render_template, request, jsonify
 
 from grandpybot import app
 from grandpybot.api_requests import req_google_place, req_media_wiki
@@ -29,18 +29,17 @@ def about():
     return render_template('about.html', title="qui suis-je ?")
 
 
-@app.route('/google_place_request', methods=['GET', 'POST'])
+@app.route('/api_request', methods=['GET', 'POST'])
 def place_request():
     """Send a request to the Google place API.
 
     Return the response.
     """
     req = req_google_place(request.form["data"])
+    descr = "" if req["status"] != "OK" else req_media_wiki(req["name"])
 
-    name = req.json()["candidates"][0]["name"]
-    text_info = req_media_wiki(name)
-
-    return req.text
+    resp = {"status": req["status"], "coords": req["coords"], "descr": descr}
+    return jsonify(resp)
 
 
 @app.after_request
