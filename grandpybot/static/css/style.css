@@ -237,6 +237,7 @@ body {
   border-radius: 50%; }
 
 .map {
+  height: 250px;
   max-width: 90%;
   max-height: 100%;
   margin-left: 5%;

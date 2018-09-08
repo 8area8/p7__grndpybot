@@ -1,6 +1,6 @@
 """Main file for views."""
 
-from flask import render_template, request, jsonify
+from flask import render_template, request
 import requests
 
 from grandpybot import app
@@ -34,4 +34,18 @@ def place_request():
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
            f"input={keywords}&inputtype=textquery&fields=geometry&key={key}")
     req = requests.get(url)
-    return req.json()
+    print(req.text)
+    return req.text
+
+
+@app.after_request
+def add_header(req):
+    """Add headers to both force latest IE rendering engine or Chrome Frame.
+
+    Also to cache the rendered page for 10 minutes.
+    """
+    req.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    req.headers["Pragma"] = "no-cache"
+    req.headers["Expires"] = "0"
+    req.headers['Cache-Control'] = 'public, max-age=0'
+    return req
