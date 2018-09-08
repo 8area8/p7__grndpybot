@@ -1,9 +1,9 @@
 """Main file for views."""
 
 from flask import render_template, request
-import requests
 
 from grandpybot import app
+from grandpybot.api_requests import req_google_place, req_media_wiki
 
 
 @app.route('/index/')
@@ -35,11 +35,11 @@ def place_request():
 
     Return the response.
     """
-    keywords = request.form["data"]
-    key = app.config["GOOGLE_KEY"]
-    url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
-           f"input={keywords}&inputtype=textquery&fields=geometry&key={key}")
-    req = requests.get(url)
+    req = req_google_place(request.form["data"])
+
+    name = req.json()["candidates"][0]["name"]
+    text_info = req_media_wiki(name)
+
     return req.text
 
 
