@@ -14,7 +14,7 @@ def index():
     url = ("https://maps.googleapis.com/maps/"
            f"api/js?key={key}&callback=initMap")
 
-    return render_template('index.html', url_map_api=url)
+    return render_template('index.html', url_map_api=url, index=True)
 
 
 @app.errorhandler(404)
