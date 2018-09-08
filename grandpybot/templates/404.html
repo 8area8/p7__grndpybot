@@ -1,118 +1,23 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>GrandPy bot</title>
-    <meta name="description" content="The HTML5">
-    <meta name="author" content="GrandPy bot">
+{% extends 'base.html' %}
 
 
-    <!-- GOOGLE MATERIAL -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-pink.min.css" />
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+{% block container %}
 
-    <!-- FONT ROBOTO -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<!-- CARD -->
+<div class="mdl-cell mdl-cell--4-col card mdc-shape-container my-shape-container">
 
-    <!-- GOOGLE MAP JS API !!KEY -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZrTwZdIVBsCMN0YbA4C5La7Ytb8OIWkw&callback=initMap" async
-        defer></script>
+    <div class="demo-card-wide mdl-card mdl-shadow--4dp">
+        <div class="mdl-card__actions messages">
 
-    <!-- PERSONNAL CSS AND JS -->
-    <script type="text/javascript" src="../static/js/main.js"></script>
-    <link href=".././static/css/style.css" rel="stylesheet">
-</head>
-
-<body>
+            <h2>404: la page recherché n'existe pas !</h2>
 
 
-    <!-- Simple header with scrollable tabs. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header mdl-layout__header--waterfall mdl-layout__header--waterfall-hide-top">
-            <div id="title" , class="mdl-layout__header-row">
-                <!-- Title -->
-                <span class="mdl-layout-title"><h1>GrandPy bot</h1></span>
-            </div>
-            <!-- Tabs -->
-            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Home</a>
-                <a href="./about.html" class="mdl-layout__tab">Qui suis-je ?</a>
-            </div>
-        </header>
-        <main class="mdl-layout__content">
-            <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
-                <div class="page-content">
-
-
-
-                    <!-- CARD -->
-                    <div class="mdl-cell mdl-cell--4-col card mdc-shape-container my-shape-container">
-
-                        <div class="demo-card-wide mdl-card mdl-shadow--4dp">
-                            <div class="mdl-card__actions messages">
-
-                                <!-- MESSAGES LIST -->
-                                <ul id="messageList" class="demo-list-three mdl-list">
-                                    <li class="GrandPy">
-                                        <img class="iconImg" src="../static/images/r_basic.png" alt="Avatar" width="50">
-                                        <span class="-text-">404</span>
-                                    </li>
-
-                                </ul>
-
-
-                            </div>
-                        </div>
-
-                        <!-- SHAPES -->
-                        <div class="mdc-shape-container__corner mdc-shape-container__corner--top-left"></div>
-                        <div class="mdc-shape-container__corner mdc-shape-container__corner--bottom-right"></div>
-                    </div>
-
-
-
-                </div>
-            </section>
-
-
-            <!-- FOOTER -->
-            <footer class="mdl-mega-footer">
-                <div class="mdl-mega-footer__middle-section">
-
-                    <div class="mdl-mega-footer__drop-down-section">
-                        <a href="https://github.com/8area8/"><img src="../static/icons/github.png" alt="github" width="60"></a>
-                    </div>
-
-                    <div class="mdl-mega-footer__drop-down-section">
-                        <a href="https://www.linkedin.com/in/mikael-briolet-117696134/"><img src="../static/icons/lin.png"
-                                alt="github" width="60"></a>
-                    </div>
-
-                    <div class="mdl-mega-footer__drop-down-section">
-                        <a href="https://openclassrooms.com/fr/dashboard"><img id="oc" src="../static/icons/op.png" alt="github"
-                                width="60"></a>
-                    </div>
-
-                    <div class="mdl-mega-footer__drop-down-section">
-                        <a href="https://twitter.com/mikareas?lang=fr"><img src="../static/icons/twit.png" alt="github" width="60"></a>
-                    </div>
-
-                </div>
-                <div class="mdl-mega-footer__bottom-section">
-                    <span>- Mikael Briolet, 2018/2019 -</span>
-                </div>
-            </footer>
-
-        </main>
+        </div>
     </div>
 
+    <!-- SHAPES -->
+    <div class="mdc-shape-container__corner mdc-shape-container__corner--top-left"></div>
+    <div class="mdc-shape-container__corner mdc-shape-container__corner--bottom-right"></div>
+</div>
 
-
-
-
-    <script type="text/javascript" src=".././static/js/main.js"></script>
-</body>
-
-</html>
+{% endblock %}

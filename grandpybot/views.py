@@ -19,7 +19,6 @@ def not_found(error):
     return (render_template('404.html'), 404)
 
 
-
 @app.route('/about/')
 def about():
     """Return the about file."""
@@ -28,13 +27,15 @@ def about():
 
 @app.route('/google_place_request', methods=['GET', 'POST'])
 def place_request():
-    """Send a request to the Google place API."""
+    """Send a request to the Google place API.
+
+    Return the response.
+    """
     keywords = request.form["data"]
     key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
            f"input={keywords}&inputtype=textquery&fields=geometry&key={key}")
     req = requests.get(url)
-    print(req.text)
     return req.text
 
 

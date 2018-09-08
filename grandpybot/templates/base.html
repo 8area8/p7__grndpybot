@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>GrandPy bot</title>
+    <meta name="description" content="The HTML5">
+    <meta name="author" content="GrandPy bot">
+
+
+    <!-- GOOGLE MATERIAL -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-pink.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!-- FONT ROBOTO -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+    <!-- GOOGLE MAP JS API !!KEY -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZrTwZdIVBsCMN0YbA4C5La7Ytb8OIWkw&callback=initMap" async
+        defer></script>
+
+    <!-- PERSONNAL CSS AND JS -->
+    <script type="text/javascript" src="../static/js/main.js"></script>
+    <link href=".././static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <!-- Simple header with scrollable tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--waterfall mdl-layout__header--waterfall-hide-top">
+            <div id="title" , class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title"><h1>GrandPy bot</h1></span>
+            </div>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="{{ url_for('index') }}" class="mdl-layout__tab">Home</a>
+                <a href="{{ url_for('about') }}" class="mdl-layout__tab">Qui suis-je ?</a>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+                <div class="page-content">
+                    {% block container %}{% endblock %}
+                </div>
+
+
+            <!-- FOOTER -->
+            <footer class="mdl-mega-footer">
+                <div class="mdl-mega-footer__middle-section">
+            
+                    <div class="mdl-mega-footer__drop-down-section">
+                        <a href="https://github.com/8area8/"><img src="../static/icons/github.png" alt="github" width="60"></a>
+                    </div>
+            
+                    <div class="mdl-mega-footer__drop-down-section">
+                        <a href="https://www.linkedin.com/in/mikael-briolet-117696134/"><img src="../static/icons/lin.png" alt="github"
+                                width="60"></a>
+                    </div>
+            
+                    <div class="mdl-mega-footer__drop-down-section">
+                        <a href="https://openclassrooms.com/fr/dashboard"><img id="oc" src="../static/icons/op.png" alt="github" width="60"></a>
+                    </div>
+            
+                    <div class="mdl-mega-footer__drop-down-section">
+                        <a href="https://twitter.com/mikareas?lang=fr"><img src="../static/icons/twit.png" alt="github" width="60"></a>
+                    </div>
+            
+                </div>
+                <div class="mdl-mega-footer__bottom-section">
+                    <span>- Mikael Briolet, 2018/2019 -</span>
+                </div>
+            </footer>
+            
+
+        </main>
+    </div>
+
+
+
+</body>          
+</html>
