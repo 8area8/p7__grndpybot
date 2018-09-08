@@ -6,15 +6,15 @@ import requests
 from grandpybot import app
 
 
-@app.route('/')
 @app.route('/index/')
+@app.route('/')
 def index():
     """Return the main file."""
     key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/"
            f"api/js?key={key}&callback=initMap")
 
-    return render_template('index.html', url_map_api=url, index=True)
+    return render_template('index.html', url_map_api=url, title="home")
 
 
 @app.errorhandler(404)
@@ -26,7 +26,7 @@ def not_found(error):
 @app.route('/about/')
 def about():
     """Return the about file."""
-    return render_template('about.html')
+    return render_template('about.html', title="qui suis-je ?")
 
 
 @app.route('/google_place_request', methods=['GET', 'POST'])
