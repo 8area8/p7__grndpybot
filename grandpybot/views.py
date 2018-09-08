@@ -1,7 +1,9 @@
 """Main file for views."""
 
+from flask import render_template, request, jsonify
+import requests
+
 from grandpybot import app
-from flask import render_template, request
 
 
 @app.route('/')
@@ -27,9 +29,9 @@ def about():
 @app.route('/google_place_request', methods=['GET', 'POST'])
 def place_request():
     """Send a request to the Google place API."""
-    req = request.args
-    import pdb; pdb.set_trace()
-    keywords = ""
+    keywords = request.form["data"]
     key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
            f"input={keywords}&inputtype=textquery&fields=geometry&key={key}")
+    req = requests.get(url)
+    return req.json()
