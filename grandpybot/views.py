@@ -35,10 +35,13 @@ def place_request():
 
     Return the response.
     """
-    req = req_google_place(request.form["data"])
-    req["text"] = "" if req["status"] != "OK" else req_media_wiki(req["name"])
-    print(jsonify(req))
-    return jsonify(req)
+    response = req_google_place(request.form["data"])
+
+    if response["status"] == "OK":
+        wiki_req = req_media_wiki(response["name"])
+        response["text"], response["wiki_link"] = wiki_req
+
+    return jsonify(response)
 
 
 @app.after_request
