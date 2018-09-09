@@ -3,7 +3,7 @@
 from flask import render_template, request, jsonify
 
 from grandpybot import app
-from grandpybot.api_requests import req_google_place, req_media_wiki
+from grandpybot.api_requests import request_google_place, request_media_wiki
 
 
 @app.route('/index/')
@@ -35,11 +35,9 @@ def place_request():
 
     Return the response.
     """
-    response = req_google_place(request.form["data"])
-
+    response = request_google_place(request.form["data"])
     if response["status"] == "OK":
-        wiki_req = req_media_wiki(response["name"])
-        response["text"], response["wiki_link"] = wiki_req
+        response.update(request_media_wiki(response["name"]))
 
     return jsonify(response)
 
