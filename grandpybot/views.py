@@ -31,15 +31,14 @@ def about():
 
 @app.route('/api_request', methods=['GET', 'POST'])
 def place_request():
-    """Send a request to the Google place API.
+    """Send a request to Google place API and Media Wiki API.
 
     Return the response.
     """
     req = req_google_place(request.form["data"])
-    descr = "" if req["status"] != "OK" else req_media_wiki(req["name"])
-
-    resp = {"status": req["status"], "coords": req["coords"], "descr": descr}
-    return jsonify(resp)
+    req["text"] = "" if req["status"] != "OK" else req_media_wiki(req["name"])
+    print(jsonify(req))
+    return jsonify(req)
 
 
 @app.after_request

@@ -242,9 +242,13 @@ body {
   max-height: 100%;
   margin-left: 5%;
   margin-right: auto;
-  margin-top: 2%;
+  margin-top: 15%;
   margin-bottom: 2%;
   border-radius: 10px; }
+.descr {
+  margin-top: 3%;
+  margin-left: 5%;
+}
 
 .mdl-dialog {
   font-size: 130%;

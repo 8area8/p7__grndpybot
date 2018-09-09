@@ -22,5 +22,8 @@ def req_google_place(keywords):
 def req_media_wiki(name):
     """Return a response with an article."""
     url = ("https://fr.wikipedia.org/w/api.php?action=opensearch"
-           f"&search=openclassroom&limit=10&namespace=0&format=json")
-    return requests.get(url).json()
+           f"&search={name}&limit=10&namespace=0&format=json")
+
+    req = requests.get(url).json()
+    text = req[2][0]
+    return text
