@@ -40,7 +40,7 @@ def request_media_wiki(name):
         """Return a random introduction text."""
         intros = ["Tiens tiens, je me souviens de ce lieu ! ",
                   "Aaaah ça y est, je vois ce que c'est ! ",
-                  "Si je me souviens bien...",
+                  "Je suis déjà passé par là... ",
                   "J'ai des choses à t'apprendre. ",
                   "J'ai quelques souvenirs de cet endroit. "]
         return choice(intros)
@@ -58,6 +58,8 @@ def request_media_wiki(name):
         text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
         wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
     else:
+        if not text:
+            text = "Mais les mots me manquent... L'émotion, sans doute."
         text = random_introductions() + text
 
     return {"text": text, "wiki_link": wiki_link}
