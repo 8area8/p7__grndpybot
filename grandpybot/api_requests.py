@@ -38,48 +38,49 @@ def request_media_wiki(coords):
     """Return a dict with a text and a link."""
     def random_introductions():
         """Return a random introduction text."""
-        intros = ["Tiens tiens, je me souviens de ce lieu ! ",
-                  "Aaaah ça y est, je vois ce que c'est ! ",
-                  "Je suis déjà passé par là... ",
-                  "J'ai des choses à t'apprendre. ",
-                  "J'ai quelques souvenirs de cet endroit. "]
+        intros = ["Tiens, ça me rappel un endroit ! ",
+                  "Ah pas très loin d'ici, papi a vécu des choses ! ",
+                  "Je connais un peu les alentours ! ",
+                  "Papi a une histoire sur les environs ! ",
+                  "Papi a quelques souvenirs de ce quartier. ;) "]
         return choice(intros)
 
-    def find_page_id_from_coordinates(lat, lng):
-        """Find the nearest place of coordinates."""
+    def title_from_(lat, lng):
+        """Find the nearest place of coordinates.
+
+        Return the place title.
+        """
         url = "https://fr.wikipedia.org/w/api.php"
         params = {"action": "query", "list": "geosearch", "gsradius": "10000",
                   "gscoord": f"{lat}|{lng}", "format": "json"}
         req = requests.get(url, params=params).json()
 
         try:
-            page_id = req["query"]["geosearch"]["pageid"]
+            title = req["query"]["geosearch"][0]["title"]
         except KeyError:
             return None
         else:
-            return page_id
+            return title
 
-    def find_text_from_id(page_id):
-        """Find the explain text of the given page_id."""
-        url = "https://fr.wikipedia.org/w/api.php"
-        params = {"action": "query", "prop": "extracts", "exlimit": "max",
-                  "explaintext": "", "exintro": "", "pageids": page_id,
-                  "redirects": ""}
-        req = requests.get(url, params=params).json()
-        text = req["query"]["pages"][page_id]["extract"]
-        return (text)
+    def text_and_link_from_(title):
+        """Find the explain text of the given title.
 
-    lat, lng = coords
-    page_id = find_page_id_from_coordinates(lat, lng)
-    if not page_id:
+        Return the explain text and the wikipedia link.
+        """
+        url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{title}"
+        req = requests.get(url).json()
+        text = req["extract"]
+        wiki_link = req["content_urls"]["desktop"]["page"]
+        return (text, wiki_link)
+
+    title = title_from_(coords["lat"], coords["lng"])
+    if not title:
         text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
         wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
     else:
-        text = find_text_from_id(page_id)
+        text, wiki_link = text_and_link_from_(title)
         if not text:
             text = "Mais les mots me manquent... Trop d'émotions."
         text = random_introductions() + text
-        wiki_link = ("https://fr.wikipedia.org/w/"
-                     f"index.php?title=AR-15&curid={page_id}")
 
     return {"text": text, "wiki_link": wiki_link}
