@@ -15,4 +15,4 @@ _mailinglist/*
 # env
 flaskenv.py
 
-.pytest_cache
+.pytest_cache/
