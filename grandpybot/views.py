@@ -37,7 +37,7 @@ def place_request():
     """
     response = request_google_place(request.form["data"])
     if response["status"] == "OK":
-        response.update(request_media_wiki(response["name"]))
+        response.update(request_media_wiki(response["coords"]))
 
     return jsonify(response)
 

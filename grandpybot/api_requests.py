@@ -34,7 +34,7 @@ def request_google_place(keywords):
     return {"status": status, "coords": coords, "name": name, "adress": adress}
 
 
-def request_media_wiki(name):
+def request_media_wiki(coords):
     """Return a dict with a text and a link."""
     def random_introductions():
         """Return a random introduction text."""
@@ -45,21 +45,41 @@ def request_media_wiki(name):
                   "J'ai quelques souvenirs de cet endroit. "]
         return choice(intros)
 
-    url = "https://fr.wikipedia.org/w/api.php"
-    params = {"action": "opensearch", "search": name,
-              "limit": "10", "namespace": "0", "format": "json"}
+    def find_page_id_from_coordinates(lat, lng):
+        """Find the nearest place of coordinates."""
+        url = "https://fr.wikipedia.org/w/api.php"
+        params = {"action": "query", "list": "geosearch", "gsradius": "10000",
+                  "gscoord": f"{lat}|{lng}", "format": "json"}
+        req = requests.get(url, params=params).json()
 
-    req = requests.get(url, params=params).json()
+        try:
+            page_id = req["query"]["geosearch"]["pageid"]
+        except KeyError:
+            return None
+        else:
+            return page_id
 
-    try:
-        text = req[2][0]
-        wiki_link = req[3][0]
-    except IndexError:
+    def find_text_from_id(page_id):
+        """Find the explain text of the given page_id."""
+        url = "https://fr.wikipedia.org/w/api.php"
+        params = {"action": "query", "prop": "extracts", "exlimit": "max",
+                  "explaintext": "", "exintro": "", "pageids": page_id,
+                  "redirects": ""}
+        req = requests.get(url, params=params).json()
+        text = req["query"]["pages"][page_id]["extract"]
+        return (text)
+
+    lat, lng = coords
+    page_id = find_page_id_from_coordinates(lat, lng)
+    if not page_id:
         text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
         wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
     else:
+        text = find_text_from_id(page_id)
         if not text:
-            text = "Mais les mots me manquent... L'émotion, sans doute."
+            text = "Mais les mots me manquent... Trop d'émotions."
         text = random_introductions() + text
+        wiki_link = ("https://fr.wikipedia.org/w/"
+                     f"index.php?title=AR-15&curid={page_id}")
 
     return {"text": text, "wiki_link": wiki_link}
