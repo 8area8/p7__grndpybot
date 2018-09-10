@@ -26,12 +26,13 @@ def request_google_place(keywords):
               "language": "fr", "key": key}
 
     req = requests.get(url, params=params).json()
-    status = req["status"]
-    coords = req["candidates"][0]["geometry"]["location"]
-    name = req["candidates"][0]["name"]
-    adress = req["candidates"][0]["formatted_address"]
+    response = {"status": req["status"]}
+    if response["status"] == "OK":
+        response["coords"] = req["candidates"][0]["geometry"]["location"]
+        response["name"] = req["candidates"][0]["name"]
+        response["adress"] = req["candidates"][0]["formatted_address"]
 
-    return {"status": status, "coords": coords, "name": name, "adress": adress}
+    return response
 
 
 def request_media_wiki(coords):
