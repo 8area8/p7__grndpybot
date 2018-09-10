@@ -1,0 +1,4 @@
+[
+  "tests/test_api_requests.py::test_OK_status_google_place",
+  "tests/test_api_requests.py::test_NOT_status_google_place"
+]

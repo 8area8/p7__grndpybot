@@ -16,20 +16,19 @@ def request_google_place(keywords):
     The dict contains:
         . a request status
         . coordinates
-        . a name
         . an adress
+    If the request fail, the dict only contains the status.
     """
     key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json")
     params = {"input": keywords, "inputtype": "textquery",
-              "fields": "formatted_address,geometry,name",
+              "fields": "formatted_address,geometry",
               "language": "fr", "key": key}
 
     req = requests.get(url, params=params).json()
     response = {"status": req["status"]}
     if response["status"] == "OK":
         response["coords"] = req["candidates"][0]["geometry"]["location"]
-        response["name"] = req["candidates"][0]["name"]
         response["adress"] = req["candidates"][0]["formatted_address"]
 
     return response
