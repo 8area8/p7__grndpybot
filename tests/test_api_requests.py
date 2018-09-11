@@ -111,7 +111,7 @@ def test_OK_coords_to_text_media_wiki(monkeypatch):
 
 
 def test_NOT_coords_to_text_media_wiki(monkeypatch):
-    """Test if the function returns a specific text when the request fail."""
+    """The function returns a specific text when the request fail."""
     base_link = "grandpybot.api_requests.MediaWiki."
     monkeypatch.setattr(base_link + "title_from_", lambda lat, lng: "")
     monkeypatch.setattr("grandpybot.api_requests.choice", lambda arg: "")
@@ -125,7 +125,7 @@ def test_NOT_coords_to_text_media_wiki(monkeypatch):
 
 
 def test_NOT_TEXT_coords_to_text_media_wiki(monkeypatch):
-    """Test if the function returns a specific text when the request fail."""
+    """The function a specific text when the request return an empty text."""
     def return_text_link(title):
         """Return a text and a link. Fake method."""
         return ("", "www.bar.org")
