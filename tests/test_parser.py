@@ -52,3 +52,17 @@ def test_parser_remove_signs(words):
 def test_parser_catch_apostrophs_early(words):
     """Test if the parser catch the french liaisons."""
     assert Parser.parse(words) == ""
+
+
+@pytest.mark.parametrize("words,excpected", [
+    ("Salut papi, j'aimerai avoir l'adresse de sète stp.", "sète"),
+    ("coucou grand père, t'aurais pas une idée d'où" +
+     " est situé Paris par hasard?", "paris"),
+    ("yo papi, j'veux bien l'adresse du groenland si ça t'chante!",
+     "groenland"),
+    ("hey, tu n'aurais pas un idée d'où se situe la rue des" +
+     " rosiers par hasard?", ("rue rosiers"))
+])
+def test_parser_test_completes_sentences(words, excpected):
+    """Situationals tests."""
+    assert Parser.parse(words) == excpected
