@@ -12,7 +12,11 @@ from grandpybot.parser import Parser
     ("Hey papi tu peux me dire comment tu vas ?"),
     ("Yo le vieu, je veux ça"),
     (","),
-    ("aujourd'hui")
+    ("aujourd'hui"),
+    ("idée"),
+    ("situé"),
+    ("avoir"),
+    ("coucou papi, t'aurais pas ?")
 ])
 def test_parser_catch_(words):
     """Test if the parser catch the givens words."""
