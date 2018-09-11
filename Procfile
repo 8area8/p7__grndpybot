@@ -1,1 +1,1 @@
-web: gunicorn grandpybot:app
+web: gunicorn run.py
