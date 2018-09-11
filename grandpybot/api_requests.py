@@ -36,16 +36,20 @@ def request_google_place(keywords):
 
 def request_media_wiki(coords):
     """Return a dict with a text and a link."""
-    def random_introductions():
-        """Return a random introduction text."""
-        intros = ["Tiens, ça me rappel un endroit ! ",
-                  "Ah pas très loin d'ici, papi a vécu des choses ! ",
-                  "Je connais un peu les alentours ! ",
-                  "Papi a une histoire sur les environs ! ",
-                  "Papi a quelques souvenirs de ce quartier. ;) "]
-        return choice(intros)
+    return MediaWiki.coords_to_text(coords)
 
-    def title_from_(lat, lng):
+
+class MediaWiki():
+    """MediaWiki class."""
+
+    intros = ["Tiens, ça me rappel un endroit ! ",
+              "Ah pas très loin d'ici, papi a vécu des choses ! ",
+              "Je connais un peu les alentours ! ",
+              "Papi a une histoire sur les environs ! ",
+              "Papi a quelques souvenirs de ce quartier. ;) "]
+
+    @classmethod
+    def title_from_(cls, lat, lng):
         """Find the nearest place of coordinates.
 
         Return the place title.
@@ -56,13 +60,14 @@ def request_media_wiki(coords):
         req = requests.get(url, params=params).json()
 
         try:
-            title = req["query"]["geosearch"][0]["title"]
-        except KeyError:
+            title = choice(req["query"]["geosearch"])["title"]
+        except (KeyError, IndexError):
             return None
         else:
             return title
 
-    def text_and_link_from_(title):
+    @classmethod
+    def text_and_link_from_(cls, title):
         """Find the explain text of the given title.
 
         Return the explain text and the wikipedia link.
@@ -73,14 +78,19 @@ def request_media_wiki(coords):
         wiki_link = req["content_urls"]["desktop"]["page"]
         return (text, wiki_link)
 
-    title = title_from_(coords["lat"], coords["lng"])
-    if not title:
-        text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
-        wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
-    else:
-        text, wiki_link = text_and_link_from_(title)
-        if not text:
-            text = "Mais les mots me manquent... Trop d'émotions."
-        text = random_introductions() + text
+    @classmethod
+    def coords_to_text(cls, coords):
+        """Get the text and the link from coordinates."""
+        title = cls.title_from_(coords["lat"], coords["lng"])
 
-    return {"text": text, "wiki_link": wiki_link}
+        if not title:
+            text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
+            wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
+        else:
+            text, wiki_link = cls.text_and_link_from_(title)
+
+            if not text:
+                text = "Mais les mots me manquent... Trop d'émotions."
+            text = choice(cls.intros) + text
+
+        return {"text": text, "wiki_link": wiki_link}
