@@ -26,10 +26,13 @@ def request_google_place(keywords):
               "language": "fr", "key": key}
 
     req = requests.get(url, params=params).json()
-    response = {"status": req["status"]}
-    if response["status"] == "OK":
-        response["coords"] = req["candidates"][0]["geometry"]["location"]
-        response["adress"] = req["candidates"][0]["formatted_address"]
+    try:
+        response = {"status": req["status"]}
+        if response["status"] == "OK":
+            response["coords"] = req["candidates"][0]["geometry"]["location"]
+            response["adress"] = req["candidates"][0]["formatted_address"]
+    except (KeyError, IndexError):
+        response = {"status": "PLOBLEM OCCURRED"}
 
     return response
 
