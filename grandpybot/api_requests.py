@@ -18,6 +18,8 @@ def request_google_place(keywords):
         . coordinates
         . an adress
     If the request fail, the dict only contains the status.
+
+    TODO: Create a log file when an exception occurs.
     """
     key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json")
@@ -32,14 +34,14 @@ def request_google_place(keywords):
             response["coords"] = req["candidates"][0]["geometry"]["location"]
             response["adress"] = req["candidates"][0]["formatted_address"]
     except (KeyError, IndexError):
-        response = {"status": "PLOBLEM OCCURRED"}
+        response = {"status": "PROBLEM_OCCURRED"}
 
     return response
 
 
 def request_media_wiki(coords):
     """Return a dict with a text and a link."""
-    return MediaWiki.coords_to_text(coords)
+    return MediaWiki.coords_to_text(coords["lat"], coords["lng"])
 
 
 class MediaWiki():
@@ -82,9 +84,9 @@ class MediaWiki():
         return (text, wiki_link)
 
     @classmethod
-    def coords_to_text(cls, coords):
+    def coords_to_text(cls, lat, lng):
         """Get the text and the link from coordinates."""
-        title = cls.title_from_(coords["lat"], coords["lng"])
+        title = cls.title_from_(lat, lng)
 
         if not title:
             text = "Eh bien mon enfant, me voici en \"terra incognita\" !"

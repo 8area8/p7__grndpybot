@@ -45,6 +45,19 @@ def test_NOT_status_google_place(monkeypatch):
     assert response["status"] == "ZERO_RESULTS"
 
 
+def test_PROBLEM_status_google_place(monkeypatch):
+    """Test if the function return a specific status when the request bugged.
+
+    This occurs when requests encounters an error.
+    """
+    json = {}
+    mock = fake_requests(json)
+    monkeypatch.setattr("grandpybot.api_requests.requests", mock)
+
+    response = request_google_place("tour eiffel")
+    assert response["status"] == "PROBLEM_OCCURRED"
+
+
 def test_OK_title_media_wiki(monkeypatch):
     """Test if the function returns a string title."""
     json = {"query": {"geosearch": [{"title": "Tour Eiffel"}]}}
@@ -83,14 +96,47 @@ def test_OK_text_link_media_wiki(monkeypatch):
 
 def test_OK_coords_to_text_media_wiki(monkeypatch):
     """Test if the function return a dict with text and link."""
-    pass
+    def return_text_link(title):
+        """Return a text and a link. Fake method."""
+        return ("foo text", "www.bar.org")
+
+    base_link = "grandpybot.api_requests.MediaWiki."
+    monkeypatch.setattr(base_link + "title_from_", lambda lat, lng: "foo")
+    monkeypatch.setattr(base_link + "text_and_link_from_", return_text_link)
+    monkeypatch.setattr("grandpybot.api_requests.choice", lambda arg: "")
+
+    response = MediaWiki.coords_to_text(20, 30)
+    assert response["text"] == "foo text"
+    assert response["wiki_link"] == "www.bar.org"
 
 
 def test_NOT_coords_to_text_media_wiki(monkeypatch):
     """Test if the function returns a specific text when the request fail."""
-    pass
+    base_link = "grandpybot.api_requests.MediaWiki."
+    monkeypatch.setattr(base_link + "title_from_", lambda lat, lng: "")
+    monkeypatch.setattr("grandpybot.api_requests.choice", lambda arg: "")
+
+    response = MediaWiki.coords_to_text(20, 30)
+
+    no_text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
+    wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
+    assert response["text"] == no_text
+    assert response["wiki_link"] == wiki_link
 
 
 def test_NOT_TEXT_coords_to_text_media_wiki(monkeypatch):
     """Test if the function returns a specific text when the request fail."""
-    pass
+    def return_text_link(title):
+        """Return a text and a link. Fake method."""
+        return ("", "www.bar.org")
+
+    base_link = "grandpybot.api_requests.MediaWiki."
+    monkeypatch.setattr(base_link + "title_from_", lambda lat, lng: "foo")
+    monkeypatch.setattr(base_link + "text_and_link_from_", return_text_link)
+    monkeypatch.setattr("grandpybot.api_requests.choice", lambda arg: "")
+
+    response = MediaWiki.coords_to_text(20, 30)
+
+    no_text = "Mais les mots me manquent... Trop d'émotions."
+    assert response["text"] == no_text
+    assert response["wiki_link"] == "www.bar.org"
