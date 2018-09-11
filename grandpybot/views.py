@@ -31,7 +31,7 @@ def about():
 
 @app.route('/api_request', methods=['GET', 'POST'])
 def place_request():
-    """Send a request to Google place API and Media Wiki API.
+    """Send request to Google place API and Media Wiki API.
 
     Return the response.
     """
