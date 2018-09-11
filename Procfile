@@ -1,2 +1,1 @@
-worker: python worker.py
-web: gunicorn -w 4 grandpybot:app
+web: gunicorn -w 1 app:app
