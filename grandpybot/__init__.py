@@ -2,6 +2,7 @@
 
 import os
 import json
+from pathlib import Path
 
 from flask import Flask
 
@@ -14,7 +15,9 @@ if is_production:
 else:
     app.config.from_object('flaskenv')
 
-with open("grandpybot.stop_words.json") as file:
-    stop_words = json.load(file)
+path_words = Path().resolve() / "grandpybot" / "stop_words.json"
+with open(path_words, encoding='utf-8') as datas:
+    stop_words = json.load(datas)
+
 
 from grandpybot import views
