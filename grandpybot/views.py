@@ -4,6 +4,7 @@ from flask import render_template, request, jsonify
 
 from grandpybot import app
 from grandpybot.api_requests import request_google_place, request_media_wiki
+from grandpybot.parser import Parser
 
 
 @app.route('/index/')
@@ -35,7 +36,10 @@ def place_request():
 
     Return the response.
     """
-    response = request_google_place(request.form["data"])
+    user_input = request.form["data"]
+    parsed_input = Parser.parse(user_input)
+
+    response = request_google_place(parsed_input)
     if response["status"] == "OK":
         response.update(request_media_wiki(response["coords"]))
 

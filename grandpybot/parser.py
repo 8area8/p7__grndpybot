@@ -8,6 +8,7 @@ class Parser():
 
     Try to return a place.
     """
+
     @staticmethod
     def parse(sentence):
         """Parse a sentence."""
