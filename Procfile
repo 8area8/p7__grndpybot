@@ -1,2 +1,2 @@
-web: gunicorn run:app
+web: gunicorn run:grandpybot
 heroku ps:scale web=1
