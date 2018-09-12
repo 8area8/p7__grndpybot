@@ -24,6 +24,12 @@ def not_found(error):
     return (render_template('404.html', title="404"), 404)
 
 
+@app.errorhandler(500)
+def internal_error(error):
+    """If 500 error."""
+    return (render_template('500.html', title="500"), 500)
+
+
 @app.route('/about/')
 def about():
     """Return the about file."""
