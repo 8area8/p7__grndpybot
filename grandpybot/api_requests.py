@@ -91,6 +91,7 @@ class MediaWiki():
         if not title:
             text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
             wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
+
         else:
             text, wiki_link = cls.text_and_link_from_(title)
 
