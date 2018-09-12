@@ -21,7 +21,7 @@ def index():
 @app.errorhandler(404)
 def not_found(error):
     """If 404 error."""
-    return (render_template('404.html'), 404)
+    return (render_template('404.html', title="404"), 404)
 
 
 @app.route('/about/')
@@ -39,11 +39,13 @@ def place_request():
     user_input = request.form["data"]
     parsed_input = Parser.parse(user_input)
 
-    response = request_google_place(parsed_input)
-    if response["status"] == "OK":
-        response.update(request_media_wiki(response["coords"]))
+    google_response = request_google_place(parsed_input)
+    wiki_response = {}
 
-    return jsonify(response)
+    if google_response["status"] == "OK":
+        wiki_response = request_media_wiki(google_response["coords"])
+
+    return jsonify({**google_response, **wiki_response})
 
 
 @app.after_request

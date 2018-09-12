@@ -61,7 +61,8 @@ def test_parser_catch_apostrophs_early(words):
     ("yo papi, j'veux bien l'adresse du groenland si ça t'chante!",
      "groenland"),
     ("hey, tu n'aurais pas un idée d'où se situe la rue des" +
-     " rosiers par hasard?", ("rue rosiers"))
+     " rosiers par hasard?", ("rue rosiers")),
+    ("je veux aller en angleterre", "angleterre")
 ])
 def test_parser_test_complete_sentences(sentence, excpected):
     """Situationals tests."""
