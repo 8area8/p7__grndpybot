@@ -11,12 +11,12 @@ from grandpybot.parser import Parser
     ("hey"),
     ("Hey papi tu peux me dire comment tu vas ?"),
     ("Yo le vieu, je veux ça"),
-    (","),
     ("aujourd'hui"),
     ("idée"),
     ("situé"),
     ("avoir"),
-    ("coucou papi, t'aurais pas ?")
+    ("coucou papi, t'aurais pas ?"),
+    ("emplacement")
 ])
 def test_parser_catch_(words):
     """Test if the parser catch the givens words."""
@@ -50,11 +50,11 @@ def test_parser_remove_signs(words):
     ("l'envie")
 ])
 def test_parser_catch_apostrophs_early(words):
-    """Test if the parser catch the french liaisons."""
+    """Test if the parser catch the french links."""
     assert Parser.parse(words) == ""
 
 
-@pytest.mark.parametrize("words,excpected", [
+@pytest.mark.parametrize("sentence,excpected", [
     ("Salut papi, j'aimerai avoir l'adresse de sète stp.", "sète"),
     ("coucou grand père, t'aurais pas une idée d'où" +
      " est situé Paris par hasard?", "paris"),
@@ -63,6 +63,6 @@ def test_parser_catch_apostrophs_early(words):
     ("hey, tu n'aurais pas un idée d'où se situe la rue des" +
      " rosiers par hasard?", ("rue rosiers"))
 ])
-def test_parser_test_completes_sentences(words, excpected):
+def test_parser_test_complete_sentences(sentence, excpected):
     """Situationals tests."""
-    assert Parser.parse(words) == excpected
+    assert Parser.parse(sentence) == excpected
