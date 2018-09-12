@@ -14,10 +14,11 @@ class Parser():
     @staticmethod
     def parse(sentence):
         """Parse a sentence."""
-        sentence = re.sub('[!@#$?,:;.]', '', sentence)
-        sentence = re.sub(r'(\s|^)\w{1}\'', ' ', sentence)
+        lowered = sentence.lower()
+        removed_signs = re.sub('[!@#$?,:;.]', '', lowered)
+        removed_apostrophes = re.sub(r'(\s|^)\w{1}\'', ' ', removed_signs)
 
-        keywords = sentence.lower().split()
+        keywords = removed_apostrophes.split()
         filtered = [word for word in keywords if word not in stop_words]
 
         return " ".join(filtered)

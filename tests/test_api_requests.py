@@ -2,8 +2,6 @@
 
 from unittest.mock import MagicMock
 
-import pytest
-
 from grandpybot.api_requests import request_google_place, MediaWiki
 
 

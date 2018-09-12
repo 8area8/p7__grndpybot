@@ -16,7 +16,7 @@ from grandpybot.parser import Parser
     ("situé"),
     ("avoir"),
     ("coucou papi, t'aurais pas ?"),
-    ("emplacement")
+    ("emplacement"),
 ])
 def test_parser_catch_(words):
     """Test if the parser catch the givens words."""
