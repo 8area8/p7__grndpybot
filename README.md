@@ -4,8 +4,6 @@ The grandfather who finds everything !
 
 ![grandpybot example](https://image.ibb.co/f0wfkU/grandpybot_example.jpg)
 
----
-
 This project is a web application that allows you to chat with a robot. This robot attempts to return the address or location given in the user message, as well as an anecdote of the surroundings.
 
 ## Getting Started
@@ -36,12 +34,12 @@ You have to create a heroku account and set this project to a new heroku project
 
 ## Built With
 
-python - back language.
-npm, webpack - Front-end developement.
-material design lite - css/js framework.
-Jquery - Javascript framework.
-flask - python web framework.
-pytest - test framework.
+python - back language.  
+npm, webpack - Front-end developement.  
+material design lite - css/js framework.  
+Jquery - Javascript framework.  
+flask - python web framework.  
+pytest - test framework.  
 
 ## Trello Scrum project
 
