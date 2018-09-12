@@ -29,8 +29,9 @@ I use Pytest for tests. Simply write ```pipenv run python -m pytest``` in your s
 
 ## Deployment
 
-Use heroku for deployment.
-You have to create a heroku account and set this project to a new heroku project. Then simply write ```git push heroku master``` to deploy your application.
+Use heroku for deployment.  
+You have to create a heroku account and set this project to a new heroku project. Then simply write ```git push heroku master``` to deploy your application.  
+>**NOTE:** You'll have to set your own google key API. Set a heroku variable called ```"GOOGLE_KEY"``` for that.
 
 ## Built With
 
