@@ -7,6 +7,7 @@ name = "pypi"
 flask = "*"
 requests = "*"
 gunicorn = "*"
+pycodestyle = "*"
 
 [dev-packages]
 pytest = "*"
@@ -14,8 +15,6 @@ pydocstyle = "*"
 pylint = "*"
 "flake8" = "*"
 "autopep8" = "*"
-"pep8" = "*"
-pycodestyle = "*"
 
 [requires]
 python_version = "3.6"
