@@ -1,7 +1,6 @@
 # The GrandPy bot project
 
-![version](https://img.shields.io/badge/version-1.0-blue.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/project-web_app-orange.svg?longCache=true&style=flat-square)
-
+![version](https://img.shields.io/badge/version-1.0-blue.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/python-3.6-ligh.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/project-web_app-orange.svg?longCache=true&style=flat-square)
 
 ![grandpybot example](https://image.ibb.co/f0wfkU/grandpybot_example.jpg)
 
@@ -22,11 +21,11 @@ to use it, you'll need to install:
 
 Run pipenv at the root of the repository to install dependencies.
 
->**NOTE:** The Javascript file ans CSS file are minified. I used a webpack environnment for frontend developement, and it is not given with this repository. You should recreate your own .js and .css file if you want to modify them.
+>**NOTE:** The Javascript file ans CSS file are minified. I used a webpack environnment for frontend developement, and it is not given with this repository. You should recreate your own .js and .css files if you want to modify them.
 
 ## Running the tests
 
-I use Pytest for tests. Simply write ```pipenv run python -m pytest``` in your shell, a the root of this repository.
+I use Pytest for tests. Simply write ```pipenv run python -m pytest``` in your shell, at the root of this repository.
 
 ## Deployment
 
@@ -36,12 +35,19 @@ You have to create a heroku account and set this project to a new heroku project
 
 ## Built With
 
-python - back language.  
-npm, webpack - Front-end developement.  
-material design lite - css/js framework.  
-Jquery - Javascript framework.  
-flask - python web framework.  
-pytest - test framework.  
+### Core dev
+
+- python - back language.  
+- npm, webpack - Front-end developement.  
+- material design lite - css/js framework.  
+- Jquery - Javascript framework.  
+- flask - python web framework.  
+- pytest - test framework.
+
+### Third API
+
+- Google (Place, Map JS)
+- MediaWiki (Geocoding, rest_V1)
 
 ## Trello Scrum project
 
