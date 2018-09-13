@@ -1,6 +1,7 @@
 # The GrandPy bot project
 
-The grandfather who finds everything !
+![version](https://img.shields.io/badge/version-1.0-blue.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/project-web_app-orange.svg?longCache=true&style=flat-square)
+
 
 ![grandpybot example](https://image.ibb.co/f0wfkU/grandpybot_example.jpg)
 
