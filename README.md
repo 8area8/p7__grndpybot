@@ -6,6 +6,13 @@
 
 This project is a web application that allows you to chat with a robot. This robot attempts to return the address or location given in the user message, as well as an anecdote of the surroundings.
 
+## Specificities
+
+- A question / answer system in the form of a chat box
+- an interactive Google map  in the answer
+- an anecdote randomly drawn from the neighborhood of the place, taken from wikipedia
+- a page about
+
 ## Getting Started
 
 You can clone this repository to your local drive and then deploy it to heroku.
