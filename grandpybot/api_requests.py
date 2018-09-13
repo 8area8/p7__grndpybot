@@ -33,15 +33,16 @@ def request_google_place(keywords):
         if response["status"] == "OK":
             response["coords"] = req["candidates"][0]["geometry"]["location"]
             response["adress"] = req["candidates"][0]["formatted_address"]
+            response["name"] = req["candidates"][0]["name"]
     except (KeyError, IndexError):
         response = {"status": "PROBLEM_OCCURRED"}
 
     return response
 
 
-def request_media_wiki(coords):
-    """Return a dict with a text and a link."""
-    return MediaWiki.coords_to_text(coords["lat"], coords["lng"])
+def request_media_wiki(coords, name):
+    """Return a dict with two texts and a link."""
+    return MediaWiki.coords_to_text(coords["lat"], coords["lng"], name)
 
 
 class MediaWiki():
@@ -82,21 +83,42 @@ class MediaWiki():
         text = req["extract"]
         wiki_link = req["content_urls"]["desktop"]["page"]
         return (text, wiki_link)
+    
 
     @classmethod
-    def coords_to_text(cls, lat, lng):
-        """Get the text and the link from coordinates."""
+    def place_text_from_(cls, title):
+        """Return the classical description of the needed place."""
+        url = "https://en.wikipedia.org/w/api.php"
+        params = {"action": "query", "list": "search", "srsearch": title, "utf8": "", "format": "json"}
+        req = requests.get(url, params=params).json()
+
+        try:
+            title_for_extract = req["query"]["search"][0]["title"].replace(" ", "_")
+
+            url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{title_for_extract}"
+            req = requests.get(url).json()
+            text = req["extract"]
+        except KeyError:
+            text = "Mon dictionnaire ne renvoie rien sur ce lieu..."
+
+        return text
+
+
+    @classmethod
+    def coords_to_text(cls, lat, lng, name):
+        """Get the two texts and the link from coordinates."""
         title = cls.title_from_(lat, lng)
+        place_text = cls.place_text_from_(title)
 
         if not title:
-            text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
+            anecdote = "Eh bien mon enfant, me voici en \"terra incognita\" !"
             wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
 
         else:
-            text, wiki_link = cls.text_and_link_from_(title)
+            anecdote, wiki_link = cls.text_and_link_from_(title)
 
-            if not text:
-                text = "Mais les mots me manquent... Trop d'émotions."
-            text = choice(cls.intros) + text
+            if not anecdote:
+                anecdote = "Mais les mots me manquent... Trop d'émotions."
+            anecdote = choice(cls.intros) + anecdote
 
-        return {"text": text, "wiki_link": wiki_link}
+        return {"place_text": place_text, "anecdote": anecdote, "wiki_link": wiki_link}

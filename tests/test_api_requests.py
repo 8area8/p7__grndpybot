@@ -5,10 +5,10 @@ from unittest.mock import MagicMock
 from grandpybot.api_requests import request_google_place, MediaWiki
 
 
-def fake_requests(json_value):
+def fake_requests(*args):
     """Create a fake requests mock with a fake json() value."""
     mock = MagicMock()
-    mock.get().json.return_value = json_value
+    mock.get().json.side_effect = args
     return mock
 
 
@@ -19,7 +19,8 @@ def test_OK_status_google_place(monkeypatch):
         location = {"lat": 20, "lng": 30}
         geometry = {"location": location}
         candidates = [{"formatted_address": "champ de Mars",
-                       "geometry": geometry}]
+                       "geometry": geometry,
+                       "name": "Tour Eiffel"}]
         response = {"candidates": candidates, "status": "OK"}
         return response
 
@@ -30,6 +31,7 @@ def test_OK_status_google_place(monkeypatch):
     assert response["status"] == "OK"
     assert response["coords"] == {"lat": 20, "lng": 30}
     assert response["adress"] == "champ de Mars"
+    assert response["name"] == "Tour Eiffel"
 
 
 def test_NOT_status_google_place(monkeypatch):
@@ -103,8 +105,8 @@ def test_OK_coords_to_text_media_wiki(monkeypatch):
     monkeypatch.setattr(base_link + "text_and_link_from_", return_text_link)
     monkeypatch.setattr("grandpybot.api_requests.choice", lambda text: "")
 
-    response = MediaWiki.coords_to_text(20, 30)
-    assert response["text"] == "foo text"
+    response = MediaWiki.coords_to_text(20, 30, "te")
+    assert response["anecdote"] == "foo text"
     assert response["wiki_link"] == "www.bar.org"
 
 
@@ -114,11 +116,11 @@ def test_NOT_coords_to_text_media_wiki(monkeypatch):
     monkeypatch.setattr(base_link + "title_from_", lambda lat, lng: "")
     monkeypatch.setattr("grandpybot.api_requests.choice", lambda text: "")
 
-    response = MediaWiki.coords_to_text(20, 30)
+    response = MediaWiki.coords_to_text(20, 30, "te")
 
     no_text = "Eh bien mon enfant, me voici en \"terra incognita\" !"
     wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
-    assert response["text"] == no_text
+    assert response["anecdote"] == no_text
     assert response["wiki_link"] == wiki_link
 
 
@@ -133,8 +135,29 @@ def test_NOT_TEXT_coords_to_text_media_wiki(monkeypatch):
     monkeypatch.setattr(base_link + "text_and_link_from_", return_text_link)
     monkeypatch.setattr("grandpybot.api_requests.choice", lambda arg: "")
 
-    response = MediaWiki.coords_to_text(20, 30)
+    response = MediaWiki.coords_to_text(20, 30, "Tour_Eiffel")
 
     no_text = "Mais les mots me manquent... Trop d'émotions."
-    assert response["text"] == no_text
+    assert response["anecdote"] == no_text
     assert response["wiki_link"] == "www.bar.org"
+
+
+def test_OK_place_text_media_wiki(monkeypatch):
+    """The function returns the place needed text."""
+    json_title = {"query": {"search": [{"title": "Tour Eiffel"}]}}
+    json_extract = {"extract": "la tour eiffel."}
+    mocks = fake_requests(json_title, json_extract)
+
+    monkeypatch.setattr("grandpybot.api_requests.requests", mocks)
+    place_text = MediaWiki.place_text_from_("tour eiffel")
+    assert place_text == "la tour eiffel."
+
+def test_NOT__place_text_media_wiki(monkeypatch):
+    """Function returns a specific text when the request fail."""
+    json_title = {"query": {"search": [{"title": "Tour Eiffel"}]}}
+    json_extract = {}
+    mocks = fake_requests(json_title, json_extract)
+
+    monkeypatch.setattr("grandpybot.api_requests.requests", mocks)
+    place_text = MediaWiki.place_text_from_("tour eiffel")
+    assert place_text == "Mon dictionnaire ne renvoie rien sur ce lieu..."

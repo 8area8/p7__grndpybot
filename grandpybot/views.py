@@ -49,7 +49,7 @@ def place_request():
     wiki_response = {}
 
     if google_response["status"] == "OK":
-        wiki_response = request_media_wiki(google_response["coords"])
+        wiki_response = request_media_wiki(google_response["coords"], google_response["name"])
 
     return jsonify({**google_response, **wiki_response})
 
