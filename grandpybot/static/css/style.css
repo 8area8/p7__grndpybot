@@ -192,7 +192,8 @@ body {
 
 .GrandPy {
   background-color: #e7e7e7;
-  margin-right: 20%; }
+  margin-right: 20%;
+}
 
 .Voyageur {
   background-color: #f2f2f2;
@@ -237,17 +238,36 @@ body {
   border-radius: 50%; }
 
 .map {
+  clear: both;
   height: 250px;
   max-width: 90%;
   max-height: 100%;
   margin-left: 5%;
   margin-right: auto;
-  margin-top: 15%;
+  margin-top: 7%;
   margin-bottom: 2%;
   border-radius: 10px; }
 .descr {
   margin-top: 3%;
   margin-left: 5%;
+}
+.descrDiv {
+  margin: 4%;
+  display: none;
+  padding: 2%;
+}
+.placeDescr {
+  margin-left: 5%;
+  margin-right: 3%;
+  line-height: 110%;
+}
+.divDictButton {
+  clear: both;
+  margin-top: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .mdl-dialog {

@@ -24,7 +24,7 @@ def request_google_place(keywords):
     key = app.config["GOOGLE_KEY"]
     url = ("https://maps.googleapis.com/maps/api/place/findplacefromtext/json")
     params = {"input": keywords, "inputtype": "textquery",
-              "fields": "formatted_address,geometry",
+              "fields": "formatted_address,geometry,name",
               "language": "fr", "key": key}
 
     req = requests.get(url, params=params).json()
@@ -88,7 +88,7 @@ class MediaWiki():
     @classmethod
     def place_text_from_(cls, title):
         """Return the classical description of the needed place."""
-        url = "https://en.wikipedia.org/w/api.php"
+        url = "https://fr.wikipedia.org/w/api.php"
         params = {"action": "query", "list": "search", "srsearch": title, "utf8": "", "format": "json"}
         req = requests.get(url, params=params).json()
 
@@ -97,8 +97,9 @@ class MediaWiki():
 
             url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{title_for_extract}"
             req = requests.get(url).json()
-            text = req["extract"]
-        except KeyError:
+            base_text = "Laisse moi regarder dans le dictionnaire... "
+            text = base_text + req["extract"]
+        except (KeyError, IndexError):
             text = "Mon dictionnaire ne renvoie rien sur ce lieu..."
 
         return text
@@ -108,7 +109,7 @@ class MediaWiki():
     def coords_to_text(cls, lat, lng, name):
         """Get the two texts and the link from coordinates."""
         title = cls.title_from_(lat, lng)
-        place_text = cls.place_text_from_(title)
+        place_text = cls.place_text_from_(name)
 
         if not title:
             anecdote = "Eh bien mon enfant, me voici en \"terra incognita\" !"
