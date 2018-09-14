@@ -70,7 +70,7 @@ class MediaWiki():
             places = req["query"]["geosearch"]
             places = [place for place in places if place["title"] != user_place]
 
-            title = choice(places)["title"]
+            title = choice(places)["title"] if places else None
         except (KeyError, IndexError):
             return None
         else:
