@@ -55,10 +55,11 @@ class MediaWiki():
               "Papi a quelques souvenirs de ce quartier. ;) "]
 
     @classmethod
-    def title_from_(cls, lat, lng):
-        """Find the nearest place of coordinates.
+    def title_from_(cls, lat, lng, user_place):
+        """Find a random place from coordinates.
 
-        Return the place title.
+        Avoid the user searching place.
+        Return a place title.
         """
         url = "https://fr.wikipedia.org/w/api.php"
         params = {"action": "query", "list": "geosearch", "gsradius": "10000",
@@ -66,7 +67,10 @@ class MediaWiki():
         req = requests.get(url, params=params).json()
 
         try:
-            title = choice(req["query"]["geosearch"])["title"]
+            places = req["query"]["geosearch"]
+            places = [place for place in places if place["title"] != user_place]
+
+            title = choice(places)["title"]
         except (KeyError, IndexError):
             return None
         else:
@@ -87,29 +91,30 @@ class MediaWiki():
 
     @classmethod
     def place_text_from_(cls, title):
-        """Return the classical description of the needed place."""
+        """Return the classical description of the needed place, and the wiki title of that place."""
         url = "https://fr.wikipedia.org/w/api.php"
         params = {"action": "query", "list": "search", "srsearch": title, "utf8": "", "format": "json"}
         req = requests.get(url, params=params).json()
 
         try:
-            title_for_extract = req["query"]["search"][0]["title"].replace(" ", "_")
+            place_name = req["query"]["search"][0]["title"]
+            place_name_api = place_name.replace(" ", "_")
 
-            url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{title_for_extract}"
+            url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{place_name_api}"
             req = requests.get(url).json()
             base_text = "Laisse moi regarder dans le dictionnaire... "
             text = base_text + req["extract"]
         except (KeyError, IndexError):
             text = "Mon dictionnaire ne renvoie rien sur ce lieu..."
 
-        return text
+        return text, place_name
 
 
     @classmethod
     def coords_to_text(cls, lat, lng, name):
         """Get the two texts and the link from coordinates."""
-        title = cls.title_from_(lat, lng)
-        place_text = cls.place_text_from_(name)
+        user_place_text, user_place_title = cls.place_text_from_(name)
+        title = cls.title_from_(lat, lng, user_place_title)
 
         if not title:
             anecdote = "Eh bien mon enfant, me voici en \"terra incognita\" !"
@@ -122,4 +127,4 @@ class MediaWiki():
                 anecdote = "Mais les mots me manquent... Trop d'émotions."
             anecdote = choice(cls.intros) + anecdote
 
-        return {"place_text": place_text, "anecdote": anecdote, "wiki_link": wiki_link}
+        return {"place_text": user_place_text, "anecdote": anecdote, "wiki_link": wiki_link}
