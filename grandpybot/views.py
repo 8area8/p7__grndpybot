@@ -15,7 +15,7 @@ def index():
     url = ("https://maps.googleapis.com/maps/"
            f"api/js?key={key}&callback=initMap")
 
-    return render_template('index.html', url_map_api=url, title="home")
+    return render_template('index.html', url_map_api=url, title="Home")
 
 
 @app.errorhandler(404)
@@ -33,7 +33,7 @@ def internal_error(error):
 @app.route('/about/')
 def about():
     """Return the about file."""
-    return render_template('about.html', title="qui suis-je ?")
+    return render_template('about.html', title="Qui suis-je ?")
 
 
 @app.route('/api_request', methods=['GET', 'POST'])

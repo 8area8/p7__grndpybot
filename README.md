@@ -4,9 +4,9 @@
 
 ## News
 
-- 14/09/2018 : New release **1.1.1**, bug fixe on *title_from()* method.
-- 14/09/2018 : The second release, **1.1** is done ! Look at the release description for more details.
-- 13/09/2018 : release **1.0** done ! Application deployed.
+- 09/14/2018 : New release **1.1.1**, bug fixe on *title_from()* method.
+- 09/15/2018 : The second release, **1.1** is done ! Look at the release description for more details.
+- 09/13/2018 : release **1.0** done ! Application deployed.
 
 ## Presentation
 
@@ -19,7 +19,7 @@ This project is a web application that allows you to chat with a robot. This rob
 - A question / answer system in the form of a chat box
 - an interactive Google map  in the answer
 - an anecdote randomly drawn from the neighborhood of the place, taken from wikipedia
-- a page about
+- a page "about"
 
 ## Getting Started
 
