@@ -11,7 +11,7 @@
 
 ## Presentation
 
-![grandpybot example](https://image.ibb.co/f0wfkU/grandpybot_example.jpg)
+![grandpybot example](https://image.ibb.co/eTu0Ge/grandpybot_example.jpg)
 
 This project is a web application that allows you to chat with a robot. This robot attempts to return the address or location given in the user message, as well as an anecdote of the surroundings.
 
@@ -73,6 +73,8 @@ You have to create a heroku account and set this project to a new heroku project
 ## Authors
 
 Mikael Briolet - Initial work - OpenClassroom
+
+Photo by Tim Mossholder on Unsplash
 
 ## License
 
