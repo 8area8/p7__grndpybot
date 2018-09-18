@@ -1,9 +1,10 @@
 # The GrandPy bot project
 
-![version](https://img.shields.io/badge/version-1.1.1-blue.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/python-3.6-ligh.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/project-web_app-orange.svg?longCache=true&style=flat-square)
+![version](https://img.shields.io/badge/version-1.1.2-blue.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/python-3.6-ligh.svg?longCache=true&style=flat-square) ![version](https://img.shields.io/badge/project-web_app-orange.svg?longCache=true&style=flat-square)
 
 ## News
 
+- 09/18/2018 : release **1.1.2**. Refactoring and css minification.
 - 09/14/2018 : New release **1.1.1**, bug fixe on *title_from()* method.
 - 09/15/2018 : The second release, **1.1** is done ! Look at the release description for more details.
 - 09/13/2018 : release **1.0** done ! Application deployed.

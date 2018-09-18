@@ -91,7 +91,7 @@ class MediaWiki():
 
     @classmethod
     def place_text_from_(cls, title):
-        """Return the classical description of the needed place, and the wiki title of that place."""
+        """Return the user place description, and the wiki title of that place."""
         url = "https://fr.wikipedia.org/w/api.php"
         params = {"action": "query", "list": "search", "srsearch": title, "utf8": "", "format": "json"}
         req = requests.get(url, params=params).json()
@@ -114,14 +114,14 @@ class MediaWiki():
     def coords_to_text(cls, lat, lng, name):
         """Get the two texts and the link from coordinates."""
         user_place_text, user_place_title = cls.place_text_from_(name)
-        title = cls.title_from_(lat, lng, user_place_title)
+        random_title = cls.title_from_(lat, lng, user_place_title)
 
-        if not title:
+        if not random_title:
             anecdote = "Eh bien mon enfant, me voici en \"terra incognita\" !"
             wiki_link = "https://fr.wikipedia.org/wiki/Terra_incognita"
 
         else:
-            anecdote, wiki_link = cls.text_and_link_from_(title)
+            anecdote, wiki_link = cls.text_and_link_from_(random_title)
 
             if not anecdote:
                 anecdote = "Mais les mots me manquent... Trop d'émotions."
